@@ -85,5 +85,10 @@ annotate service.Users with @(
         },
         TypeImageUrl : 'sap-icon://customer',
     },
+    UI.FieldGroup #OrderHistory : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+        ],
+    },
 );
 

@@ -585,7 +585,22 @@ annotate service.Cart with @(
                 Label: 'Overall Price (₹)',
             },
         ]
-    }
+    },
+    UI.SelectionPresentationVariant #tableView : {
+        $Type : 'UI.SelectionPresentationVariantType',
+        PresentationVariant : {
+            $Type : 'UI.PresentationVariantType',
+            Visualizations : [
+                '@UI.LineItem',
+            ],
+        },
+        SelectionVariant : {
+            $Type : 'UI.SelectionVariantType',
+            SelectOptions : [
+            ],
+        },
+        Text : 'View Cart',
+    },
 );
 
 // Cart Items — sub-table on Object Page
@@ -722,41 +737,61 @@ annotate service.Users with {
     ID @Common.Text: name
 };
 
-annotate service.Products with {
-    ID @(
-        Common.ValueList               : {
-            $Type         : 'Common.ValueListType',
-            CollectionPath: 'Products',
-            Parameters    : [
-                {
-                    $Type            : 'Common.ValueListParameterInOut',
-                    LocalDataProperty: product_ID, // 🔥 THIS ENTITY FIELD
-                    ValueListProperty: 'ID',
-                    // 🔥 FROM PRODUCTS
-                },
-                {
-                    $Type            : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty: 'name',
-                }
-            ],
-        },
-        Common.ValueListWithFixedValues: true,
-        Common.Text                    : name,
-        Common.FieldControl            : #Mandatory,
-    )
-};
-
 annotate service.CartItems with {
     product @(
-        Common.ValueList               : {
-            $Type         : 'Common.ValueListType',
-            CollectionPath: 'Products',
-            Parameters    : [{
-                $Type            : 'Common.ValueListParameterInOut',
-                LocalDataProperty: product_ID,
-                ValueListProperty: 'ID',
-            }, ],
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Products',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : product_ID,
+                    ValueListProperty : 'ID',
+                },
+            ],
         },
-        Common.ValueListWithFixedValues: true,
-    )
-};
+        Common.ValueListWithFixedValues : true,
+        Common.Text : product.name,
+        Common.ExternalID : product.name,
+)};
+
+annotate service.Orders with @(
+    UI.LineItem #tableView : [
+    ],
+    UI.SelectionPresentationVariant #tableView : {
+        $Type : 'UI.SelectionPresentationVariantType',
+        PresentationVariant : {
+            $Type : 'UI.PresentationVariantType',
+            Visualizations : [
+                '@UI.LineItem#tableView',
+            ],
+        },
+        SelectionVariant : {
+            $Type : 'UI.SelectionVariantType',
+            SelectOptions : [
+            ],
+        },
+        Text : 'View Orders',
+    },
+);
+
+annotate service.OrderItems with @(
+    UI.LineItem #tableView1 : [
+    ],
+    UI.SelectionPresentationVariant #tableView1 : {
+        $Type : 'UI.SelectionPresentationVariantType',
+        PresentationVariant : {
+            $Type : 'UI.PresentationVariantType',
+            Visualizations : [
+                '@UI.LineItem#tableView1',
+            ],
+        },
+        SelectionVariant : {
+            $Type : 'UI.SelectionVariantType',
+            SelectOptions : [
+            ],
+        },
+        Text : 'View Order Items',
+    },
+);
+

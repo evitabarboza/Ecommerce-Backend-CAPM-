@@ -118,7 +118,8 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "widthIncludingColumnHeader": true
                   }
                 }
               },
@@ -128,7 +129,21 @@
                   "requiresRefresh": true
                 }
               },
-              "initialLoad": "Enabled"
+              "initialLoad": "Enabled",
+              "views": {
+                "paths": [
+                  {
+                    "key": "tableView",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView",
+                    "visible": true
+                  },
+                  {
+                    "key": "tableView1",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView",
+                    "entitySet": "Orders"
+                  }
+                ]
+              }
             }
           }
         },
